@@ -1,0 +1,754 @@
+{
+	"id": "641dac00-da35-4c36-8132-009eb1846031",
+	"name": "mottu",
+	"timestamp": "2023-06-26T01:09:51.822Z",
+	"collection_id": "5114087-b1cf718e-2d59-4a56-923e-aebd862bad0c",
+	"folder_id": 0,
+	"environment_id": "5114087-59e6758c-3505-425c-b10f-7edbb3b764eb",
+	"totalPass": 72,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-06-26T01:09:43.218Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "872ff583-6005-48bb-8cf8-79f27dc0776c",
+			"name": "single character",
+			"url": "https://gateway.marvel.com:443/v1/public/characters/1009146?ts=2023-06-25&apikey=9b2e3c525ef6f2e24676f6ee80477800&hash=1e630c0150b5a2d8b07d076574859afe",
+			"time": 498,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status code name has the string OK": true,
+				"Response time is less than 2s": true,
+				"Response header validation": true,
+				"Response body data validation": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has the string OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 2s": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response header validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body data validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				498
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status code name has the string OK": true,
+					"Response time is less than 2s": true,
+					"Response header validation": true,
+					"Response body data validation": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "3a19b1fc-6fbc-4bfc-9ef7-fb35b7b102f8",
+			"name": "single character not found",
+			"url": "https://gateway.marvel.com:443/v1/public/characters/invalid?ts=2023-06-25&apikey=9b2e3c525ef6f2e24676f6ee80477800&hash=1e630c0150b5a2d8b07d076574859afe",
+			"time": 475,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true,
+				"Status code name has the string Not Found": true,
+				"Response time is less than 2s": true,
+				"Response header validation": true,
+				"Response body data validation": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has the string Not Found": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 2s": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response header validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body data validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				475
+			],
+			"allTests": [
+				{
+					"Status code is 404": true,
+					"Status code name has the string Not Found": true,
+					"Response time is less than 2s": true,
+					"Response header validation": true,
+					"Response body data validation": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "c8595344-e704-4ba7-8720-0dee5afc71f8",
+			"name": "single character with unauthorized user",
+			"url": "https://gateway.marvel.com:443/v1/public/characters/1009146?ts=2023-06-25&apikey=9b2e3c525ef6f2e24676f6ee80477800&hash=test",
+			"time": 463,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 401": true,
+				"Status code name has the string Unauthorized": true,
+				"Response time is less than 2s": true,
+				"Response header validation": true,
+				"Response body data validation": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has the string Unauthorized": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 2s": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response header validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body data validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				463
+			],
+			"allTests": [
+				{
+					"Status code is 401": true,
+					"Status code name has the string Unauthorized": true,
+					"Response time is less than 2s": true,
+					"Response header validation": true,
+					"Response body data validation": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "ff8c784e-32c2-4d73-9b48-4a673ca8e783",
+			"name": "single character missing parameters",
+			"url": "https://gateway.marvel.com:443/v1/public/characters/1009146?ts=2023-06-25&apikey=9b2e3c525ef6f2e24676f6ee80477800",
+			"time": 457,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"Status code is 409": true,
+				"Status code name has the string Conflict": true,
+				"Response time is less than 2s": true,
+				"Response header validation": true,
+				"Response body data validation": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 409": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has the string Conflict": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 2s": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response header validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body data validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				457
+			],
+			"allTests": [
+				{
+					"Status code is 409": true,
+					"Status code name has the string Conflict": true,
+					"Response time is less than 2s": true,
+					"Response header validation": true,
+					"Response body data validation": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "2c06c423-071b-4029-bdf1-85e69a974a5d",
+			"name": "list of stories",
+			"url": "https://gateway.marvel.com:443/v1/public/stories?ts=2023-06-25&apikey=9b2e3c525ef6f2e24676f6ee80477800&hash=1e630c0150b5a2d8b07d076574859afe",
+			"time": 2068,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status code name has the string OK": true,
+				"Response time is less than 5s": true,
+				"Response header validation": true,
+				"Response body data validation": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has the string OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 5s": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response header validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body data validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2068
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status code name has the string OK": true,
+					"Response time is less than 5s": true,
+					"Response header validation": true,
+					"Response body data validation": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "2dd8ccec-81e5-43f0-838c-468c768f1b1e",
+			"name": "list of stories with parameters",
+			"url": "https://gateway.marvel.com:443/v1/public/stories?characters=1009146&limit=1&ts=2023-06-25&apikey=9b2e3c525ef6f2e24676f6ee80477800&hash=1e630c0150b5a2d8b07d076574859afe",
+			"time": 511,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status code name has the string OK": true,
+				"Response time is less than 5s": true,
+				"Response header validation": true,
+				"Response body data validation": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has the string OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 5s": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response header validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body data validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				511
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status code name has the string OK": true,
+					"Response time is less than 5s": true,
+					"Response header validation": true,
+					"Response body data validation": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "72401dd0-a081-48e1-9dc1-e4c004797021",
+			"name": "list of stories with unrecognized parameters",
+			"url": "https://gateway.marvel.com:443/v1/public/stories?test=1009146&ts=2023-06-25&apikey=9b2e3c525ef6f2e24676f6ee80477800&hash=1e630c0150b5a2d8b07d076574859afe",
+			"time": 512,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"Status code is 409": true,
+				"Status code name has the string Conflict": true,
+				"Response time is less than 5s": true,
+				"Response header validation": true,
+				"Response body data validation": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 409": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has the string Conflict": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 5s": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response header validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body data validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				512
+			],
+			"allTests": [
+				{
+					"Status code is 409": true,
+					"Status code name has the string Conflict": true,
+					"Response time is less than 5s": true,
+					"Response header validation": true,
+					"Response body data validation": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "e3e57a5b-49d2-4c63-ba6c-686d1fdaee06",
+			"name": "list of stories with empty parameter value",
+			"url": "https://gateway.marvel.com:443/v1/public/stories?characters=&ts=2023-06-25&apikey=9b2e3c525ef6f2e24676f6ee80477800&hash=1e630c0150b5a2d8b07d076574859afe",
+			"time": 494,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"Status code is 409": true,
+				"Status code name has the string Conflict": true,
+				"Response time is less than 5s": true,
+				"Response header validation": true,
+				"Response body data validation": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 409": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has the string Conflict": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 5s": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response header validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body data validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				494
+			],
+			"allTests": [
+				{
+					"Status code is 409": true,
+					"Status code name has the string Conflict": true,
+					"Response time is less than 5s": true,
+					"Response header validation": true,
+					"Response body data validation": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "d641fecb-add0-4a7a-95ea-bc87df7add43",
+			"name": "list of stories with unauthorized user",
+			"url": "https://gateway.marvel.com:443/v1/public/stories?ts=2023-06-25&apikey=9b2e3c525ef6f2e24676f6ee80477800&hash=test",
+			"time": 460,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 401": true,
+				"Status code name has the string Unauthorized": true,
+				"Response time is less than 5s": true,
+				"Response header validation": true,
+				"Response body data validation": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has the string Unauthorized": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 5s": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response header validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body data validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				460
+			],
+			"allTests": [
+				{
+					"Status code is 401": true,
+					"Status code name has the string Unauthorized": true,
+					"Response time is less than 5s": true,
+					"Response header validation": true,
+					"Response body data validation": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "510ec2fc-d1f5-421b-85b4-41c5d19312d2",
+			"name": "list of stories with limit greater than 100",
+			"url": "https://gateway.marvel.com:443/v1/public/stories?limit=101&ts=2023-06-25&apikey=9b2e3c525ef6f2e24676f6ee80477800&hash=1e630c0150b5a2d8b07d076574859afe",
+			"time": 516,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"Status code is 409": true,
+				"Status code name has the string Conflict": true,
+				"Response time is less than 5s": true,
+				"Response header validation": true,
+				"Response body data validation": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 409": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has the string Conflict": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 5s": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response header validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body data validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				516
+			],
+			"allTests": [
+				{
+					"Status code is 409": true,
+					"Status code name has the string Conflict": true,
+					"Response time is less than 5s": true,
+					"Response header validation": true,
+					"Response body data validation": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "10e97e42-27d2-4912-9659-e2d7259ad07d",
+			"name": "list of stories with limit below 1",
+			"url": "https://gateway.marvel.com:443/v1/public/stories?limit=-1&ts=2023-06-25&apikey=9b2e3c525ef6f2e24676f6ee80477800&hash=1e630c0150b5a2d8b07d076574859afe",
+			"time": 500,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"Status code is 409": true,
+				"Status code name has the string Conflict": true,
+				"Response time is less than 5s": true,
+				"Response header validation": true,
+				"Response body data validation": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 409": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has the string Conflict": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 5s": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response header validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body data validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				500
+			],
+			"allTests": [
+				{
+					"Status code is 409": true,
+					"Status code name has the string Conflict": true,
+					"Response time is less than 5s": true,
+					"Response header validation": true,
+					"Response body data validation": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "1c66e87d-530a-496a-98b7-d67e7c6bf6fa",
+			"name": "list of stories with invalid ordering parameter",
+			"url": "https://gateway.marvel.com:443/v1/public/stories?orderBy=test&ts=2023-06-25&apikey=9b2e3c525ef6f2e24676f6ee80477800&hash=1e630c0150b5a2d8b07d076574859afe",
+			"time": 489,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"Status code is 409": true,
+				"Status code name has the string Conflict": true,
+				"Response time is less than 5s": true,
+				"Response header validation": true,
+				"Response body data validation": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 409": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code name has the string Conflict": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 5s": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response header validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body data validation": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				489
+			],
+			"allTests": [
+				{
+					"Status code is 409": true,
+					"Status code name has the string Conflict": true,
+					"Response time is less than 5s": true,
+					"Response header validation": true,
+					"Response body data validation": true,
+					"Test data type of the response": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 7443,
+	"collection": {
+		"requests": [
+			{
+				"id": "872ff583-6005-48bb-8cf8-79f27dc0776c",
+				"method": "GET"
+			},
+			{
+				"id": "3a19b1fc-6fbc-4bfc-9ef7-fb35b7b102f8",
+				"method": "GET"
+			},
+			{
+				"id": "c8595344-e704-4ba7-8720-0dee5afc71f8",
+				"method": "GET"
+			},
+			{
+				"id": "ff8c784e-32c2-4d73-9b48-4a673ca8e783",
+				"method": "GET"
+			},
+			{
+				"id": "2c06c423-071b-4029-bdf1-85e69a974a5d",
+				"method": "GET"
+			},
+			{
+				"id": "2dd8ccec-81e5-43f0-838c-468c768f1b1e",
+				"method": "GET"
+			},
+			{
+				"id": "72401dd0-a081-48e1-9dc1-e4c004797021",
+				"method": "GET"
+			},
+			{
+				"id": "e3e57a5b-49d2-4c63-ba6c-686d1fdaee06",
+				"method": "GET"
+			},
+			{
+				"id": "d641fecb-add0-4a7a-95ea-bc87df7add43",
+				"method": "GET"
+			},
+			{
+				"id": "510ec2fc-d1f5-421b-85b4-41c5d19312d2",
+				"method": "GET"
+			},
+			{
+				"id": "10e97e42-27d2-4912-9659-e2d7259ad07d",
+				"method": "GET"
+			},
+			{
+				"id": "1c66e87d-530a-496a-98b7-d67e7c6bf6fa",
+				"method": "GET"
+			}
+		]
+	}
+}

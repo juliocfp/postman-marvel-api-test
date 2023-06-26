@@ -1,0 +1,1386 @@
+{
+	"info": {
+		"_postman_id": "b1cf718e-2d59-4a56-923e-aebd862bad0c",
+		"name": "mottu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5114087"
+	},
+	"item": [
+		{
+			"name": "GET /v1/public/characters/{characterId}",
+			"item": [
+				{
+					"name": "single character",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"pm.environment.set('time_stamp', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var message = pm.environment.get('time_stamp')+pm.environment.get('api_private_key')+pm.environment.get('api_public_key');\r",
+									"var hash = CryptoJS.MD5(message);\r",
+									"pm.environment.set(\"hash\", hash.toString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has the string OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header validation\", function () {\r",
+									"    pm.response.to.have.header(\"Etag\");\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body data validation\", function () {\r",
+									"    pm.expect(jsonData.copyright).to.eql(\"© 2023 MARVEL\");\r",
+									"    pm.expect(jsonData.attributionText).to.eql(\"Data provided by Marvel. © 2023 MARVEL\");\r",
+									"    pm.expect(jsonData.attributionHTML).to.eql(\"<a href=\\\"http://marvel.com\\\">Data provided by Marvel. © 2023 MARVEL</a>\");\r",
+									"    pm.expect(jsonData.data.results[0].id).to.eql(parseInt(pm.environment.get(\"character_id\")));\r",
+									"    pm.expect(jsonData.data.results[0].name).to.eql(\"Abomination (Emil Blonsky)\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", function () {\r",
+									"    pm.expect(jsonData.code).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.status).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.copyright).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.attributionText).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.attributionHTML).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.etag).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.offset).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.limit).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.total).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.count).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].id).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].name).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].description).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].modified).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].thumbnail).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].thumbnail.path).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].thumbnail.extension).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].comics).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.items[0].resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.items[0].name).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].series).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].series.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].series.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].series.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].series.items[0].resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].series.items[0].name).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].series.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].stories).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].stories.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].stories.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].stories.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].stories.items[0].resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].stories.items[0].name).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].stories.items[0].type).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].stories.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].events).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].events.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].events.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].events.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].events.items[0].resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].events.items[0].name).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].events.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].urls).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].urls[0].type).to.be.an(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].urls[0].url).to.be.an(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false,
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"accept": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gateway.marvel.com:443/v1/public/characters/{{character_id}}?ts={{time_stamp}}&apikey={{api_public_key}}&hash={{hash}}",
+							"protocol": "https",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"public",
+								"characters",
+								"{{character_id}}"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{time_stamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{api_public_key}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hash}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single character not found",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"pm.environment.set('time_stamp', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var message = pm.environment.get('time_stamp')+pm.environment.get('api_private_key')+pm.environment.get('api_public_key');\r",
+									"var hash = CryptoJS.MD5(message);\r",
+									"pm.environment.set(\"hash\", hash.toString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has the string Not Found\", function () {\r",
+									"    pm.response.to.have.status(\"Not Found\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header validation\", function () {\r",
+									"    pm.response.to.not.have.header(\"Etag\");\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body data validation\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"We couldn't find that character\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", function () {\r",
+									"    pm.expect(jsonData.code).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.status).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false,
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"accept": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gateway.marvel.com:443/v1/public/characters/invalid?ts={{time_stamp}}&apikey={{api_public_key}}&hash={{hash}}",
+							"protocol": "https",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"public",
+								"characters",
+								"invalid"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{time_stamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{api_public_key}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hash}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single character with unauthorized user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has the string Unauthorized\", function () {\r",
+									"    pm.response.to.have.status(\"Unauthorized\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header validation\", function () {\r",
+									"    pm.response.to.not.have.header(\"Etag\");\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body data validation\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"That hash, timestamp and key combination is invalid.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", function () {\r",
+									"    pm.expect(jsonData.code).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.message).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false,
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"accept": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gateway.marvel.com:443/v1/public/characters/{{character_id}}?ts={{time_stamp}}&apikey={{api_public_key}}&hash=test",
+							"protocol": "https",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"public",
+								"characters",
+								"{{character_id}}"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{time_stamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{api_public_key}}"
+								},
+								{
+									"key": "hash",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single character missing parameters",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has the string Conflict\", function () {\r",
+									"    pm.response.to.have.status(\"Conflict\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header validation\", function () {\r",
+									"    pm.response.to.not.have.header(\"Etag\");\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body data validation\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"You must provide a hash.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", function () {\r",
+									"    pm.expect(jsonData.code).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.message).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false,
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"accept": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gateway.marvel.com:443/v1/public/characters/{{character_id}}?ts={{time_stamp}}&apikey={{api_public_key}}",
+							"protocol": "https",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"public",
+								"characters",
+								"{{character_id}}"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{time_stamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{api_public_key}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET /v1/public/stories",
+			"item": [
+				{
+					"name": "list of stories",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"pm.environment.set('time_stamp', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var message = pm.environment.get('time_stamp')+pm.environment.get('api_private_key')+pm.environment.get('api_public_key');\r",
+									"var hash = CryptoJS.MD5(message);\r",
+									"pm.environment.set(\"hash\", hash.toString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has the string OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 5s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header validation\", function () {\r",
+									"    pm.response.to.have.header(\"Etag\");\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body data validation\", function () {\r",
+									"    pm.expect(jsonData.copyright).to.eql(\"© 2023 MARVEL\");\r",
+									"    pm.expect(jsonData.attributionText).to.eql(\"Data provided by Marvel. © 2023 MARVEL\");\r",
+									"    pm.expect(jsonData.attributionHTML).to.eql(\"<a href=\\\"http://marvel.com\\\">Data provided by Marvel. © 2023 MARVEL</a>\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", function () {\r",
+									"    pm.expect(jsonData.code).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.status).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.copyright).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.attributionText).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.attributionHTML).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.etag).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.offset).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.limit).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.total).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.count).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].id).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].title).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].description).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].type).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].modified).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].thumbnail).to.be.null;\r",
+									"    pm.expect(jsonData.data.results[0].creators).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].creators.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].creators.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].creators.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].creators.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].characters).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].characters.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].characters.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].characters.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].characters.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].series).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].series.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].series.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].series.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].series.items[0].resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].series.items[0].name).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].series.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].comics).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.items[0].resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.items[0].name).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].events).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].events.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].events.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].events.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].events.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].originalIssue).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].originalIssue.resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].originalIssue.name).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gateway.marvel.com:443/v1/public/stories?ts={{time_stamp}}&apikey={{api_public_key}}&hash={{hash}}",
+							"protocol": "https",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"public",
+								"stories"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{time_stamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{api_public_key}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hash}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list of stories with parameters",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"pm.environment.set('time_stamp', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var message = pm.environment.get('time_stamp')+pm.environment.get('api_private_key')+pm.environment.get('api_public_key');\r",
+									"var hash = CryptoJS.MD5(message);\r",
+									"pm.environment.set(\"hash\", hash.toString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has the string OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 5s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header validation\", function () {\r",
+									"    pm.response.to.have.header(\"Etag\");\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body data validation\", function () {\r",
+									"    pm.expect(jsonData.copyright).to.eql(\"© 2023 MARVEL\");\r",
+									"    pm.expect(jsonData.attributionText).to.eql(\"Data provided by Marvel. © 2023 MARVEL\");\r",
+									"    pm.expect(jsonData.attributionHTML).to.eql(\"<a href=\\\"http://marvel.com\\\">Data provided by Marvel. © 2023 MARVEL</a>\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", function () {\r",
+									"    pm.expect(jsonData.code).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.status).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.copyright).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.attributionText).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.attributionHTML).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.etag).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.offset).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.limit).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.total).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.count).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].id).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].title).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].description).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].type).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].modified).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].thumbnail).to.be.null;\r",
+									"    pm.expect(jsonData.data.results[0].creators).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].creators.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].creators.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].creators.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].creators.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].characters).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].characters.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].characters.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].characters.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].characters.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].series).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].series.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].series.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].series.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].series.items[0].resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].series.items[0].name).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].series.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].comics).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.items[0].resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.items[0].name).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].comics.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].events).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].events.available).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].events.collectionURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].events.items).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.data.results[0].events.returned).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.data.results[0].originalIssue).to.be.an(\"object\");\r",
+									"    pm.expect(jsonData.data.results[0].originalIssue.resourceURI).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.results[0].originalIssue.name).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gateway.marvel.com:443/v1/public/stories?characters={{character_id}}&limit=1&ts={{time_stamp}}&apikey={{api_public_key}}&hash={{hash}}",
+							"protocol": "https",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"public",
+								"stories"
+							],
+							"query": [
+								{
+									"key": "characters",
+									"value": "{{character_id}}"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "ts",
+									"value": "{{time_stamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{api_public_key}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hash}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list of stories with unrecognized parameters",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"pm.environment.set('time_stamp', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var message = pm.environment.get('time_stamp')+pm.environment.get('api_private_key')+pm.environment.get('api_public_key');\r",
+									"var hash = CryptoJS.MD5(message);\r",
+									"pm.environment.set(\"hash\", hash.toString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has the string Conflict\", function () {\r",
+									"    pm.response.to.have.status(\"Conflict\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 5s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header validation\", function () {\r",
+									"    pm.response.to.not.have.header(\"Etag\");\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body data validation\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"We don't recognize the parameter test\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", function () {\r",
+									"    pm.expect(jsonData.code).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.status).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gateway.marvel.com:443/v1/public/stories?test={{character_id}}&ts={{time_stamp}}&apikey={{api_public_key}}&hash={{hash}}",
+							"protocol": "https",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"public",
+								"stories"
+							],
+							"query": [
+								{
+									"key": "test",
+									"value": "{{character_id}}"
+								},
+								{
+									"key": "ts",
+									"value": "{{time_stamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{api_public_key}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hash}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list of stories with empty parameter value",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"pm.environment.set('time_stamp', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var message = pm.environment.get('time_stamp')+pm.environment.get('api_private_key')+pm.environment.get('api_public_key');\r",
+									"var hash = CryptoJS.MD5(message);\r",
+									"pm.environment.set(\"hash\", hash.toString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has the string Conflict\", function () {\r",
+									"    pm.response.to.have.status(\"Conflict\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 5s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header validation\", function () {\r",
+									"    pm.response.to.not.have.header(\"Etag\");\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body data validation\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"You must pass at least one valid character if you set the character filter.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", function () {\r",
+									"    pm.expect(jsonData.code).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.status).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gateway.marvel.com:443/v1/public/stories?characters=&ts={{time_stamp}}&apikey={{api_public_key}}&hash={{hash}}",
+							"protocol": "https",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"public",
+								"stories"
+							],
+							"query": [
+								{
+									"key": "characters",
+									"value": ""
+								},
+								{
+									"key": "ts",
+									"value": "{{time_stamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{api_public_key}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hash}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list of stories with unauthorized user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"pm.environment.set('time_stamp', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var message = pm.environment.get('time_stamp')+pm.environment.get('api_private_key')+pm.environment.get('api_public_key');\r",
+									"var hash = CryptoJS.MD5(message);\r",
+									"pm.environment.set(\"hash\", hash.toString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has the string Unauthorized\", function () {\r",
+									"    pm.response.to.have.status(\"Unauthorized\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 5s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header validation\", function () {\r",
+									"    pm.response.to.not.have.header(\"Etag\");\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body data validation\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"That hash, timestamp and key combination is invalid.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", function () {\r",
+									"    pm.expect(jsonData.code).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.message).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gateway.marvel.com:443/v1/public/stories?ts={{time_stamp}}&apikey={{api_public_key}}&hash=test",
+							"protocol": "https",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"public",
+								"stories"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{time_stamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{api_public_key}}"
+								},
+								{
+									"key": "hash",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list of stories with limit greater than 100",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"pm.environment.set('time_stamp', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var message = pm.environment.get('time_stamp')+pm.environment.get('api_private_key')+pm.environment.get('api_public_key');\r",
+									"var hash = CryptoJS.MD5(message);\r",
+									"pm.environment.set(\"hash\", hash.toString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has the string Conflict\", function () {\r",
+									"    pm.response.to.have.status(\"Conflict\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 5s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header validation\", function () {\r",
+									"    pm.response.to.not.have.header(\"Etag\");\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body data validation\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"You may not request more than 100 items.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", function () {\r",
+									"    pm.expect(jsonData.code).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.status).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gateway.marvel.com:443/v1/public/stories?limit=101&ts={{time_stamp}}&apikey={{api_public_key}}&hash={{hash}}",
+							"protocol": "https",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"public",
+								"stories"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "101"
+								},
+								{
+									"key": "ts",
+									"value": "{{time_stamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{api_public_key}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hash}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list of stories with limit below 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"pm.environment.set('time_stamp', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var message = pm.environment.get('time_stamp')+pm.environment.get('api_private_key')+pm.environment.get('api_public_key');\r",
+									"var hash = CryptoJS.MD5(message);\r",
+									"pm.environment.set(\"hash\", hash.toString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has the string Conflict\", function () {\r",
+									"    pm.response.to.have.status(\"Conflict\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 5s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header validation\", function () {\r",
+									"    pm.response.to.not.have.header(\"Etag\");\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body data validation\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"You must pass an integer limit greater than 0.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", function () {\r",
+									"    pm.expect(jsonData.code).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.status).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gateway.marvel.com:443/v1/public/stories?limit=-1&ts={{time_stamp}}&apikey={{api_public_key}}&hash={{hash}}",
+							"protocol": "https",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"public",
+								"stories"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "-1"
+								},
+								{
+									"key": "ts",
+									"value": "{{time_stamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{api_public_key}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hash}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list of stories with invalid ordering parameter",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"pm.environment.set('time_stamp', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var message = pm.environment.get('time_stamp')+pm.environment.get('api_private_key')+pm.environment.get('api_public_key');\r",
+									"var hash = CryptoJS.MD5(message);\r",
+									"pm.environment.set(\"hash\", hash.toString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has the string Conflict\", function () {\r",
+									"    pm.response.to.have.status(\"Conflict\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 5s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header validation\", function () {\r",
+									"    pm.response.to.not.have.header(\"Etag\");\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.response.to.have.header(\"Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body data validation\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"test is not a valid ordering parameter.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", function () {\r",
+									"    pm.expect(jsonData.code).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.status).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gateway.marvel.com:443/v1/public/stories?orderBy=test&ts={{time_stamp}}&apikey={{api_public_key}}&hash={{hash}}",
+							"protocol": "https",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"public",
+								"stories"
+							],
+							"query": [
+								{
+									"key": "orderBy",
+									"value": "test"
+								},
+								{
+									"key": "ts",
+									"value": "{{time_stamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{api_public_key}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hash}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
