@@ -1,7 +1,7 @@
 # Projeto de Validação de APIs da Marvel usando Postman [![N|Solid](https://voyager.postman.com/logo/postman-logo-icon-orange.svg)](https://www.postman.com/product/what-is-postman/)
 
-> I guess one person can make a difference. </p>
-> Stan Lee
+> _I guess one person can make a difference._ </p>
+> _Stan Lee_
 
 Este projeto tem como objetivo realizar a validação de dois serviços da API da Marvel usando a ferramenta Postman. As validações incluem verificação do status code, status code name, timeout, teste de contrato e validação do response.
 
