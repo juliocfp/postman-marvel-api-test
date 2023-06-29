@@ -1,4 +1,4 @@
-# Validação de APIs da Marvel usando Postman [![N|Solid](https://voyager.postman.com/logo/postman-logo-icon-orange.svg)](https://www.postman.com/product/what-is-postman/)
+# Validação de APIs da Marvel usando Postman [![Postman](https://voyager.postman.com/logo/postman-logo-icon-orange.svg)](https://www.postman.com/product/what-is-postman/)
 
 > _I guess one person can make a difference._ </p>
 > _Stan Lee_
